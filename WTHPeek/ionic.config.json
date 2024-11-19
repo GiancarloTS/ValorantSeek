@@ -1,0 +1,7 @@
+{
+  "name": "ValorantSeek",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
