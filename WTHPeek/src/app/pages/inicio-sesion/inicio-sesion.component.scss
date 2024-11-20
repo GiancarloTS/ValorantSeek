@@ -1,0 +1,30 @@
+ion-content {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 50vh; /* Usar 100vh para ocupar toda la altura del viewport */
+  background-color: #f0f0f0; /* Fondo claro para contraste */
+}
+
+.login-box {
+  background-color: black; /* Fondo negro para el cuadro */
+  padding: 20px;
+  border-radius: 10px; /* Esquinas redondeadas */
+  width: 90%; /* Ancho del cuadro */
+  max-width: 400px; /* Ancho máximo del cuadro */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra opcional para profundidad */
+  color: white; /* Texto blanco para contraste */
+}
+
+ion-item {
+  --background: transparent; /* Hacer el fondo del ion-item transparente */
+  --color: white; /* Cambiar el color del texto del ion-item a blanco */
+}
+
+ion-label {
+  color: white; /* Cambiar el color del texto de las etiquetas a blanco */
+}
+
+ion-button {
+  margin-top: 20px; /* Agregar algo de espacio encima del botón */
+}
