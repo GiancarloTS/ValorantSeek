@@ -1,0 +1,38 @@
+<div class="filter-container">
+  <label for="countryFilter">País:</label>
+  <input
+    type="text"
+    id="countryFilter"
+    [(ngModel)]="searchCountry"
+    (input)="filterVehicles()"
+    placeholder="Filtrar por país (ej. usa, japan, italy)"
+  />
+
+  <label for="typeFilter">Tipo de Vehículo:</label>
+  <select id="typeFilter" [(ngModel)]="searchType" (change)="filterVehicles()">
+    <option value="">Todos</option>
+    <option *ngFor="let type of vehicleTypes" [value]="type">{{ type }}</option>
+  </select>
+</div>
+
+<div class="results-container" *ngIf="filteredVehicles.length > 0; else noResults">
+  <h2>Vehículos encontrados: {{ filteredVehicles.length }}</h2>
+  <div *ngFor="let vehicle of filteredVehicles" class="vehicle-card">
+    <img
+      [src]="vehicle.images?.image"
+      [alt]="vehicle.identifier"
+      class="vehicle-image"
+      (error)="vehicle.images.image = 'assets/default-image.png'"
+    />
+    <h3>{{ vehicle.identifier }}</h3>
+    <p>País: <strong>{{ vehicle.country }}</strong></p>
+    <p>Tipo: <strong>{{ vehicle.vehicle_type }}</strong></p>
+    <p>Era: {{ vehicle.era }}</p>
+    <p>Fecha de lanzamiento: {{ vehicle.release_date || 'Desconocida' }}</p>
+    <p *ngIf="vehicle.is_premium">⭐ Premium</p>
+  </div>
+</div>
+
+<ng-template #noResults>
+  <h3>No se encontraron vehículos con los filtros aplicados.</h3>
+</ng-template>
