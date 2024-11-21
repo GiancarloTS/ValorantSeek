@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { VehicleSearchPage } from './vehicle-search.page';
 import { VehicleSearchPageRoutingModule } from './vehicle-search-routing.module';
 import { VehicleService } from '../../services/vehicle.service';
+import { RouterLink } from '@angular/router';
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -12,7 +14,9 @@ import { VehicleService } from '../../services/vehicle.service';
     FormsModule,
     IonicModule,
     VehicleSearchPageRoutingModule,
-  ],
+    RouterLink,
+    SharedModule
+],
   declarations: [VehicleSearchPage],
   providers: [VehicleService],
 })

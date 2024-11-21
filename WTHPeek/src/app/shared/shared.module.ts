@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavegadorComponent } from './navegador/navegador.component';
 import { RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 
 
 
@@ -11,10 +12,12 @@ import { RouterLink } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
+    IonicModule
   ],
   exports:[
-    NavegadorComponent
+    NavegadorComponent,
+
   ]
 })
 export class SharedModule { }
