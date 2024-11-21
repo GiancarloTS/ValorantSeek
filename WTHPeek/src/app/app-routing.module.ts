@@ -3,15 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'vehicle-search',
+    path: '',
     loadChildren: () =>
-      import('./pages/vehicle-search/vehicle-search.module').then(
-        (m) => m.VehicleSearchPageModule
-      ),
+      import('./pages/pages.module').then((m) => m.PagesModule),
   },
   {
     path: '',
-    redirectTo: 'inicio-sesion',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
 ];
