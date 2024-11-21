@@ -7,6 +7,7 @@ import { VehicleSearchPageRoutingModule } from './vehicle-search-routing.module'
 import { VehicleService } from '../../services/vehicle.service';
 import { RouterLink } from '@angular/router';
 import { SharedModule } from "../../shared/shared.module";
+import { NavegadorComponent } from 'src/app/shared/navegador/navegador.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { SharedModule } from "../../shared/shared.module";
     VehicleSearchPageRoutingModule,
     RouterLink,
     SharedModule
+
 ],
   declarations: [VehicleSearchPage],
   providers: [VehicleService],

@@ -27,28 +27,52 @@
         <ion-select-option *ngFor="let type of types" [value]="type">{{ type }}</ion-select-option>
       </ion-select>
     </ion-item>
+
+    <!-- Botón para borrar filtros -->
+    <ion-item lines="none">
+      <ion-button expand="block" color="medium" (click)="resetFilters()">
+        Borrar filtros
+      </ion-button>
+    </ion-item>
   </ion-list>
 
   <!-- Indicador de Carga -->
   <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
 
   <!-- Resultados -->
-  <ion-grid *ngIf="!isLoading && vehicles.length > 0">
+  <ion-grid *ngIf="!isLoading && displayedVehicles.length > 0">
     <ion-row>
-      <ion-col size="6" *ngFor="let vehicle of vehicles">
+      <ion-col size="6" *ngFor="let vehicle of displayedVehicles">
         <ion-card>
+          <!-- Imagen del vehículo -->
           <img [src]="vehicle.images.image" alt="{{ vehicle.identifier }}" />
+
           <ion-card-header>
             <ion-card-title>{{ vehicle.identifier }}</ion-card-title>
           </ion-card-header>
+
+          <!-- Información adicional -->
+          <ion-card-content>
+            <p><strong>BR Realista:</strong> {{ vehicle.realistic_br }}</p>
+            <p><strong>Era:</strong> {{ vehicle.era }}</p>
+            <p><strong>Valor:</strong> {{ vehicle.value }}</p>
+            <p><strong>Fecha de Lanzamiento:</strong> {{ vehicle.release_date }}</p>
+            <p><strong>Cantidad de Tripulación:</strong> {{ vehicle.crew_total_count }}</p>
+          </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
 
   <!-- Mensaje Sin Resultados -->
-  <ion-text *ngIf="!isLoading && vehicles.length === 0">
-    No se ha ningun vehiculo
+  <ion-text *ngIf="!isLoading && displayedVehicles.length === 0">
+    No se encontraron vehículos.
   </ion-text>
+
+  <!-- Botón para cargar más -->
+  <ion-button expand="full" (click)="loadMoreVehicles()" *ngIf="!isLoading && vehicles.length > displayedVehicles.length">
+    Cargar más
+  </ion-button>
 </ion-content>
+
 <app-navegador></app-navegador>
