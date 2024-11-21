@@ -9,6 +9,14 @@ const routes: Routes = [
     path: 'vehicle-search',
     loadChildren: () => import('../Pages/vehicle-search/vehicle-search.module').then( m => m.VehicleSearchPageModule)
   },
+  {
+    path: 'login',
+    loadChildren: () => import('../Pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'inicio',
+    loadChildren: () => import('../Pages/inicio/inicio.module').then( m => m.InicioPageModule)
+  },
 
 ];
 
