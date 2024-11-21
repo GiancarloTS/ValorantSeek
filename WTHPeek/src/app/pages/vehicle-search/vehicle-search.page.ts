@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VehicleService } from '../../services/vehicle.service';
-
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-vehicle-search',
@@ -8,62 +7,52 @@ import { VehicleService } from '../../services/vehicle.service';
   styleUrls: ['./vehicle-search.page.scss'],
 })
 export class VehicleSearchPage implements OnInit {
-  // Filtros
+  countries: string[] = [];
+  types: string[] = [
+    'tank', 'light_tank', 'medium_tank', 'heavy_tank', 'tank_destroyer',
+    'spaa', 'lbv', 'mbv', 'hbv', 'exoskeleton', 'attack_helicopter',
+    'utility_helicopter', 'fighter', 'assault', 'bomber', 'ship',
+    'destroyer', 'light_cruiser', 'boat', 'heavy_boat', 'barge',
+    'frigate', 'heavy_cruiser', 'battlecruiser', 'battleship', 'submarine'
+  ];
   selectedCountry: string = '';
   selectedType: string = '';
-
-  // Datos para los desplegables
-  countries: string[] = ['USA', 'Germany', 'Russia', 'China', 'Japan']; // Ejemplo de países
-  types: string[] = [
-    'tank',
-    'light_tank',
-    'medium_tank',
-    'heavy_tank',
-    'tank_destroyer',
-    'spaa',
-    'lbv',
-    'mbv',
-    'hbv',
-    'exoskeleton',
-    'attack_helicopter',
-    'utility_helicopter',
-    'fighter',
-    'assault',
-    'bomber',
-    'ship',
-    'destroyer',
-    'light_cruiser',
-    'boat',
-    'heavy_boat',
-    'barge',
-    'frigate',
-    'heavy_cruiser',
-    'battlecruiser',
-    'battleship',
-    'submarine',
-  ];
-
-  // Resultados
   vehicles: any[] = [];
+  isLoading: boolean = false;
 
-  constructor(private vehicleService: VehicleService) {}
+  private apiUrl: string = 'https://www.wtvehiclesapi.sgambe.serv00.net/api/vehicles';
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    // Cargar vehículos al inicio (sin filtros)
-    this.fetchVehicles();
+    this.loadCountries();
+    this.loadVehicles(); // Carga inicial sin filtros
   }
 
-  // Actualizar los filtros y buscar vehículos
-  onFiltersChange() {
-    this.fetchVehicles();
+  // Carga países únicos de la API
+  loadCountries() {
+    this.http.get<any[]>(this.apiUrl).subscribe((data) => {
+      const allCountries = data.map((vehicle) => vehicle.country);
+      this.countries = Array.from(new Set(allCountries)); // Obtener valores únicos
+    });
   }
 
-  // Llamada al servicio para obtener los vehículos filtrados
-  fetchVehicles() {
-    this.vehicleService
-      .getVehicles(this.selectedCountry, this.selectedType)
-      .subscribe((data: any[]) => {
-        this.vehicles = data;
+  // Carga vehículos filtrados
+  loadVehicles() {
+    this.isLoading = true;
+    this.http.get<any[]>(this.apiUrl).subscribe((data) => {
+      this.vehicles = data.filter((vehicle) => {
+        return (
+          (!this.selectedCountry || vehicle.country === this.selectedCountry) &&
+          (!this.selectedType || vehicle.vehicle_type === this.selectedType)
+        );
       });
+      this.isLoading = false;
+    });
+  }
+
+  // Llamado al cambiar filtros
+  onFiltersChange() {
+    this.loadVehicles();
   }
 }

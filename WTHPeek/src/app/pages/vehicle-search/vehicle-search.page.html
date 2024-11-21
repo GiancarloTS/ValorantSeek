@@ -29,17 +29,25 @@
     </ion-item>
   </ion-list>
 
+  <!-- Indicador de Carga -->
+  <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+
   <!-- Resultados -->
-  <ion-grid>
+  <ion-grid *ngIf="!isLoading && vehicles.length > 0">
     <ion-row>
       <ion-col size="6" *ngFor="let vehicle of vehicles">
         <ion-card>
-          <img [src]="vehicle.image" alt="{{ vehicle.name }}" />
+          <img [src]="vehicle.images.image" alt="{{ vehicle.identifier }}" />
           <ion-card-header>
-            <ion-card-title>{{ vehicle.name }}</ion-card-title>
+            <ion-card-title>{{ vehicle.identifier }}</ion-card-title>
           </ion-card-header>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <!-- Mensaje Sin Resultados -->
+  <ion-text *ngIf="!isLoading && vehicles.length === 0">
+    No vehicles match the selected filters.
+  </ion-text>
 </ion-content>
