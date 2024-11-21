@@ -1,13 +1,45 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>vehicle-search</ion-title>
+    <ion-title>Vehicle Search</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">vehicle-search</ion-title>
+      <ion-title size="large">Vehicle Search</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-list>
+    <!-- Filtro por País -->
+    <ion-item>
+      <ion-label>Country</ion-label>
+      <ion-select [(ngModel)]="selectedCountry" (ionChange)="onFiltersChange()">
+        <ion-select-option *ngFor="let country of countries" [value]="country">{{ country }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Filtro por Tipo -->
+    <ion-item>
+      <ion-label>Type</ion-label>
+      <ion-select [(ngModel)]="selectedType" (ionChange)="onFiltersChange()">
+        <ion-select-option *ngFor="let type of types" [value]="type">{{ type }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <!-- Resultados -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let vehicle of vehicles">
+        <ion-card>
+          <img [src]="vehicle.image" alt="{{ vehicle.name }}" />
+          <ion-card-header>
+            <ion-card-title>{{ vehicle.name }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

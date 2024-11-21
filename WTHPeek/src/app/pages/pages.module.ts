@@ -1,25 +1,17 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { PagesRoutingModule } from './pages-routing.module';
-import { InicioComponent } from './inicio/inicio.component';
-import { NavegadorComponent } from '../shared/navegador/navegador.component';
-import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
-
+import { PagesRoutingModule } from './pages-routing.module';
 
 @NgModule({
-  declarations: [
-    InicioComponent,
-    InicioSesionComponent,
-
-  ],
   imports: [
     CommonModule,
-    PagesRoutingModule,
-    SharedModule,
+    FormsModule,
     IonicModule,
-  ]
+    PagesRoutingModule,
+  ],
+  declarations: [],
 })
-export class PagesModule { }
+export class PagesModule {}

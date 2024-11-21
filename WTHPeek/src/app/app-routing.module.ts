@@ -1,18 +1,23 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./pages/pages.module').then( m => m.PagesModule)
+    path: 'vehicle-search',
+    loadChildren: () =>
+      import('./pages/vehicle-search/vehicle-search.module').then(
+        (m) => m.VehicleSearchPageModule
+      ),
   },
-  {path:"**",redirectTo:"not-found"},
+  {
+    path: '',
+    redirectTo: 'inicio-sesion',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
