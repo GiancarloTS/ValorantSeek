@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { NavegadorComponent } from './navegador/navegador.component';
 import { RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { PerfilEmbComponent } from './perfil-emb/perfil-emb.component';
 
 
 
 @NgModule({
   declarations: [
-    NavegadorComponent
+    NavegadorComponent,
+    PerfilEmbComponent,
   ],
   imports: [
     CommonModule,
@@ -17,6 +19,7 @@ import { IonicModule } from '@ionic/angular';
   ],
   exports:[
     NavegadorComponent,
+    PerfilEmbComponent,
 
   ]
 })

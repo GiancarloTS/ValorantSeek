@@ -3,27 +3,25 @@ import { AuthService } from './../../firebase/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
+  selector: 'app-perfil-emb',
+  templateUrl: './perfil-emb.component.html',
+  styleUrls: ['./perfil-emb.component.scss'],
 })
-export class ProfilePage implements OnInit {
-  user: any ; // Aquí guardamos los datos completos del usuario
+export class PerfilEmbComponent implements OnInit {
+  user: any = null; // Aquí guardamos los datos completos del usuario
   formattedLastActivity: string | null = null; // Variable para la fecha formateada
-  constructor(private AuthService: AuthService) {}
-  load = false;
-  ngOnInit() {
+  constructor(private AuthService: AuthService, private Router: Router) {}
+
+  ngOnInit(): void {
     // Suscribirse a los datos completos del usuario
     this.AuthService.authState$.subscribe((userData) => {
       this.user = userData;
+      console.log('Datos completos del usuario:', this.user);
 
       // Formatear la fecha de última actividad
       this.formatLastActivity();
     });
   }
-
-
-
   formatLastActivity(): void {
     if (this.user && this.user.lastactiviy) {
       console.log('Timestamp de última actividad:', this.user.lastactiviy);
@@ -49,5 +47,9 @@ export class ProfilePage implements OnInit {
         }
       }
     }
+  }
+  haciaPerfil() {
+    console.log('aqui');
+    this.Router.navigate(['/profile']);
   }
 }

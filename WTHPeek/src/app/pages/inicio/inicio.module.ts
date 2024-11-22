@@ -16,7 +16,7 @@ import { NavegadorComponent } from 'src/app/shared/navegador/navegador.component
     FormsModule,
     IonicModule,
     InicioPageRoutingModule,
-    SharedModule
+    SharedModule,
 ],
   declarations: [InicioPage]
 })
