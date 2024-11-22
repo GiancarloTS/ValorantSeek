@@ -1,1 +1,109 @@
-p{}
+/* Fondo General */
+ion-content {
+  background: linear-gradient(to bottom, #1c1f24, #111315); /* Fondo degradado oscuro */
+  color: #ffffff; /* Texto blanco predeterminado */
+  font-family: 'Roboto', sans-serif; /* Tipografía moderna */
+  padding: 10px; /* Espaciado general */
+}
+
+/* Header Styling */
+ion-header {
+  background-color: #23272e; /* Fondo oscuro del header */
+  border-bottom: 2px solid #2d3138; /* Línea decorativa */
+}
+
+ion-toolbar ion-title {
+  font-size: 20px;
+  color: #e0e0e0; /* Tono claro para el texto */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Tarjetas de Vehículos */
+ion-card {
+  background: rgba(35, 39, 46, 0.9); /* Fondo translúcido */
+  border: 1px solid #2d3138; /* Bordes oscuros */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6); /* Sombra ligera */
+  margin-bottom: 15px; /* Espaciado entre tarjetas */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+ion-card:hover {
+  transform: scale(1.03); /* Ligero aumento al pasar el cursor */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.8); /* Sombra más intensa */
+}
+
+ion-card img {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  width: 100%;
+  height: auto;
+}
+
+ion-card-header ion-card-title {
+  font-size: 18px;
+  color: #ffffff; /* Texto blanco */
+  text-align: center;
+  margin: 10px 0;
+  letter-spacing: 0.5px;
+}
+
+/* Información adicional */
+ion-card-content {
+  font-size: 14px;
+  color: #b0b0b0; /* Texto gris claro */
+  line-height: 1.5;
+}
+
+/* Botones */
+ion-button {
+  --background: #2e343e; /* Fondo oscuro metálico */
+  --background-activated: #41474f; /* Fondo al presionar */
+  --color: #ffffff; /* Texto blanco */
+  border-radius: 6px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+ion-button:hover {
+  --background: #3a4049; /* Fondo más claro al pasar el cursor */
+}
+
+/* Contenedor de filtros */
+ion-list {
+  background: rgba(35, 39, 46, 0.8); /* Fondo translúcido */
+  border: 1px solid #2d3138; /* Bordes oscuros */
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+ion-item {
+  --background: transparent;
+  --color: #ffffff;
+  margin-bottom: 10px;
+}
+
+ion-select {
+  --color: #ffffff;
+  --placeholder-color: #888888; /* Texto del placeholder */
+  --background: rgba(46, 50, 57, 0.8); /* Fondo translúcido */
+}
+
+ion-label {
+  font-size: 14px;
+  color: #d0d0d0;
+}
+
+/* Spinner */
+ion-spinner {
+  --color: #ffffff;
+}
+
+/* Sección Responsiva */
+@media (max-width: 768px) {
+  ion-card-content {
+    font-size: 13px; /* Ajuste de texto para pantallas pequeñas */
+  }
+}
