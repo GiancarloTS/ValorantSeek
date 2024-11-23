@@ -1,0 +1,21 @@
+ion-content {
+    background: linear-gradient(to bottom, #1c1f24, #111315); /* Fondo oscuro */
+    color: #ffffff;
+    padding: 15px;
+  }
+  
+  ion-card {
+    background: rgba(35, 39, 46, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+  }
+  
+  ion-card-header {
+    text-align: center;
+  }
+  
+  ion-card-title {
+    font-size: 1.5rem;
+  }
+  

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Zona de Expertos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="userData">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Bienvenido, {{ userData.name }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Rango: {{ userData.rank }}</p>
+        <p>Título: {{ userData.title }}</p>
+        <p>K/D Promedio: {{ userData.kdpromedio }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <p *ngIf="!userData">Cargando información...</p>
+</ion-content>
+
