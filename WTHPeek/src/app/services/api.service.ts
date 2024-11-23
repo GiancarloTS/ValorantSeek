@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private baseUrl: string = "https://www.wtvehiclesapi.sgambe.serv00.net/api/vehicles"; // Cambia por la URL de tu API
+  private baseUrl: string = "https://www.wtvehiclesapi.sgambe.serv00.net/api/vehicles";
 
   constructor(private http: HttpClient) { }
    // Método para obtener datos

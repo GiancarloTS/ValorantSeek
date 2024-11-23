@@ -5,5 +5,28 @@
 </ion-header>
 <ion-content>
 <app-perfil-emb></app-perfil-emb></ion-content>
+<div class="news-section">
+  <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+
+  <ion-grid *ngIf="!isLoading">
+    <ion-row>
+      <ion-col size="12" size-md="6" *ngFor="let news of steamNews">
+        <ion-card>
+          <ion-img [src]="news.contents?.image || 'assets/default-news-image.jpg'" alt="Imagen de noticia"></ion-img>
+          <ion-card-header>
+            <ion-card-title>{{ news.title }}</ion-card-title>
+            <ion-card-subtitle>{{ news.date * 1000 | date: 'fullDate' }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ news.contents | slice: 0:100 }}...</p>
+            <ion-button fill="outline" href="{{ news.url }}" target="_blank">Leer más</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+
 <app-navegador></app-navegador>
+
 

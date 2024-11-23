@@ -6,8 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class VehicleService {
-  private baseUrl = 'https://www.wtvehiclesapi.sgambe.serv00.net/api/vehicles'; // Cambiar por la URL real de la API
-
+  private baseUrl = 'https://www.wtvehiclesapi.sgambe.serv00.net/api/vehicles';
   constructor(private http: HttpClient) {}
 
   // Obtener vehículos con filtros
