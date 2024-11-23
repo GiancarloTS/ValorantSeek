@@ -1,7 +1,8 @@
 {
-    "/WTHPEEK/*":{
-      "target" : "https://api.steampowered.com",
-      "secure" : false,
+    "/api": {
+      "target": "https://api.steampowered.com",
+      "secure": true,
+      "changeOrigin": true,
       "logLevel": "debug"
     }
-}
+  }

@@ -1,32 +1,29 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>Inicio</ion-title>
+    <ion-title>Noticias de Steam</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-<app-perfil-emb></app-perfil-emb></ion-content>
-<div class="news-section">
-  <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+  <!-- Spinner mientras cargan las noticias -->
+  <ion-spinner *ngIf="isLoading" name="crescent" class="loading-spinner"></ion-spinner>
 
-  <ion-grid *ngIf="!isLoading">
-    <ion-row>
-      <ion-col size="12" size-md="6" *ngFor="let news of steamNews">
-        <ion-card>
-          <ion-img [src]="news.contents?.image || 'assets/default-news-image.jpg'" alt="Imagen de noticia"></ion-img>
-          <ion-card-header>
-            <ion-card-title>{{ news.title }}</ion-card-title>
-            <ion-card-subtitle>{{ news.date * 1000 | date: 'fullDate' }}</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            <p>{{ news.contents | slice: 0:100 }}...</p>
-            <ion-button fill="outline" href="{{ news.url }}" target="_blank">Leer más</ion-button>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</div>
+  <!-- Lista de noticias -->
+  <ion-list *ngIf="!isLoading && steamNews.length > 0">
+    <ion-item *ngFor="let news of steamNews">
+      <ion-label>
+        <h2>{{ news.title }}</h2>
+        <p>{{ news.contents }}</p>
+        <ion-button fill="clear" color="primary" [href]="news.url" target="_blank">
+          Leer más
+        </ion-button>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
+  <!-- Mensaje si no hay noticias -->
+  <div *ngIf="!isLoading && steamNews.length === 0" class="no-news">
+    <p>No hay noticias disponibles en este momento.</p>
+  </div>
+</ion-content>
 <app-navegador></app-navegador>
-
-

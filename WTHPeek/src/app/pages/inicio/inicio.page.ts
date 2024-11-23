@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SteamNewsService } from 'src/app/services/steam-news.service';
+import { SteamNewsService } from '../../services/steam-news.service';
 
 @Component({
   selector: 'app-inicio',
@@ -7,8 +7,8 @@ import { SteamNewsService } from 'src/app/services/steam-news.service';
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit {
-  steamNews: any[] = []; // Array para almacenar las noticias
-  isLoading: boolean = true; // Spinner mientras carga
+  steamNews: any[] = []; // Noticias obtenidas
+  isLoading: boolean = true; // Muestra un spinner mientras carga
 
   constructor(private steamNewsService: SteamNewsService) {}
 
@@ -16,9 +16,8 @@ export class InicioPage implements OnInit {
     this.loadSteamNews();
   }
 
-  // Método para cargar noticias de Steam
   loadSteamNews() {
-    this.steamNewsService.getSteamNews().subscribe(
+    this.steamNewsService.geSteamNews().subscribe(
       (data) => {
         if (data && data.appnews && data.appnews.newsitems) {
           this.steamNews = data.appnews.newsitems; // Guardamos las noticias

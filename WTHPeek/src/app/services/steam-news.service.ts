@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class SteamNewsService {
-  private apiUrl = '/ISteamNews/GetNewsForApp/v0002/?appid=236390';
+  private apiUrl = 'https://breach-steam-um4k.vercel.app/steam-news'
 
   constructor(private http: HttpClient) {}
 
-  getSteamNews(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+  geSteamNews(): Observable<any>{
+    return this.http.get(this.apiUrl)
   }
 }
