@@ -5,20 +5,26 @@
 </ion-header>
 
 <ion-content>
-<app-perfil-emb></app-perfil-emb>
+  <app-perfil-emb></app-perfil-emb>
+
   <!-- Spinner mientras cargan las noticias -->
   <ion-spinner *ngIf="isLoading" name="crescent" class="loading-spinner"></ion-spinner>
 
   <!-- Lista de noticias -->
   <ion-list *ngIf="!isLoading && steamNews.length > 0">
     <ion-item *ngFor="let news of steamNews">
-      <ion-label>
-        <h2>{{ news.title }}</h2>
-        <p>{{ news.contents }}</p>
-        <ion-button fill="clear" color="primary" [href]="news.url" target="_blank">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ news.title }}</ion-card-title>
+          <ion-card-subtitle>{{ news.date * 1000 | date: 'fullDate' }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content [innerHTML]="news.formattedContents">
+          <!-- Renderizar contenido formateado -->
+        </ion-card-content>
+        <ion-button fill="outline" color="primary" [href]="news.url" target="_blank">
           Leer más
         </ion-button>
-      </ion-label>
+      </ion-card>
     </ion-item>
   </ion-list>
 
@@ -26,5 +32,7 @@
   <div *ngIf="!isLoading && steamNews.length === 0" class="no-news">
     <p>No hay noticias disponibles en este momento.</p>
   </div>
+
+
 </ion-content>
 <app-navegador></app-navegador>

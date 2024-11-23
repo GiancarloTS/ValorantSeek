@@ -1,40 +1,97 @@
-.news-section {
-  margin-top: 20px; /* Espaciado superior */
+/* Fondo General */
+ion-content {
+  background: linear-gradient(to bottom, #1c1f24, #0f0f12); /* Fondo degradado oscuro */
+  color: #ffffff; /* Texto blanco predeterminado */
+  font-family: 'Roboto', sans-serif; /* Tipografía moderna */
+  padding: 10px; /* Espaciado general */
 }
 
+/* Tarjetas de Noticias */
 ion-card {
-  background: #1c1f24;
-  color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
-  margin-bottom: 15px;
+  background: rgba(35, 39, 46, 0.9); /* Fondo translúcido oscuro */
+  border: 1px solid #2d3138; /* Bordes oscuros */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6); /* Sombra ligera */
+  margin-bottom: 15px; /* Espaciado entre tarjetas */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+ion-card:hover {
+  transform: scale(1.02); /* Ligero aumento al pasar el cursor */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.8); /* Sombra más intensa */
 }
 
 ion-card-title {
   font-size: 18px;
   font-weight: bold;
+  color: #ffffff; /* Texto blanco */
+  text-align: center;
+  margin: 10px 0;
+  letter-spacing: 0.5px;
 }
 
 ion-card-subtitle {
-  color: #b0b0b0;
-}
-
-ion-card-content p {
+  color: #b0b0b0; /* Texto gris claro */
   font-size: 14px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Contenido de Noticias */
+ion-card-content {
+  font-size: 14px;
+  color: #d0d0d0; /* Texto gris claro */
   line-height: 1.5;
+  margin: 10px 0;
 }
 
-ion-button {
-  --background: #2e343e;
-  --color: #ffffff;
-  border-radius: 6px;
-  font-weight: bold;
-}
-
+/* Imagen de Noticias */
 ion-img {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   width: 100%;
   height: auto;
   object-fit: cover;
+  margin-bottom: 10px;
+}
+
+/* Botones */
+ion-button {
+  --background: #2e343e; /* Fondo oscuro metálico */
+  --background-activated: #41474f; /* Fondo al presionar */
+  --color: #ffffff; /* Texto blanco */
+  border-radius: 6px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  margin-top: 10px;
+}
+
+ion-button:hover {
+  --background: #3a4049; /* Fondo más claro al pasar el cursor */
+}
+
+/* Spinner */
+.loading-spinner {
+  display: block;
+  margin: 20px auto;
+  color: #ffffff;
+}
+
+/* Sin Noticias */
+.no-news {
+  text-align: center;
+  font-size: 16px;
+  color: #d0d0d0;
+  margin-top: 20px;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  ion-card-title {
+    font-size: 16px; /* Ajustar tamaño para pantallas pequeñas */
+  }
+
+  ion-card-content {
+    font-size: 12px; /* Texto más pequeño */
+  }
 }
