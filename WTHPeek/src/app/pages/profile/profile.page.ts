@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class ProfilePage implements OnInit {
   user: any ; // Aquí guardamos los datos completos del usuario
   formattedLastActivity: string | null = null; // Variable para la fecha formateada
-  constructor(private AuthService: AuthService) {}
+  constructor(private AuthService: AuthService,private Router:Router) {}
   load = false;
   ngOnInit() {
     // Suscribirse a los datos completos del usuario
@@ -21,7 +21,10 @@ export class ProfilePage implements OnInit {
       this.formatLastActivity();
     });
   }
-
+  logout() {
+    this.AuthService.logout();  // Cerrar sesión
+    this.Router.navigate(['/']);
+  }
 
 
   formatLastActivity(): void {

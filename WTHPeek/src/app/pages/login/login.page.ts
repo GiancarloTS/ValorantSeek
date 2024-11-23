@@ -14,7 +14,7 @@ export class LoginPage implements OnInit {
   // Variables para almacenar el email y la contraseña del formulario
     email: string = '';
     password: string = '';
-
+    isLoading: boolean = false; // Indicador de carga
     error: string = '';
   constructor(private AuthService:AuthService,private FirestoreService:FirestoreService,private router:Router) {
     this.error = '';
@@ -27,24 +27,13 @@ export class LoginPage implements OnInit {
   async loginUser() {
     try {
       // Iniciar sesión
+      this.isLoading = true;
       const userCredential = await this.AuthService.login(this.email, this.password);
+      this.isLoading = false;
 
-      // Obtener el UID del usuario autenticado
-      const uid = userCredential.user?.uid;
-
-      // Obtener el rol del usuario desde Firestore
-      const userData = await this.FirestoreService.getUser(uid);
-      const rol = userData ? userData['rol'] : null;
-
-      // Redirigir según el rol
-      if (rol === 'docente') {
-        this.router.navigate(['/docente']);
-      } else if (rol === 'alumno') {
-        this.router.navigate(['/alumno']);
-      } else {
-        console.error('Rol desconocido:', rol);
-      }
+      this.router.navigate(['/']);
     } catch (error) {
+      this.isLoading = false;
       console.error('Error al iniciar sesión:', error);
       this.error = this.AuthService.GenerarError(error);
     }

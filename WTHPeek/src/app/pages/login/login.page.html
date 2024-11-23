@@ -1,26 +1,31 @@
-
 <ion-content>
   <div class="login-box">
     <form (submit)="loginUser()">
       <ion-item>
-          <ion-input label="Correo Electronico" name="email"  [(ngModel)]="email"></ion-input>
+        <ion-input
+          label="Correo Electronico"
+          name="email"
+          [(ngModel)]="email"
+        ></ion-input>
       </ion-item>
 
       <ion-item>
-
-        <ion-input label="Contraseña"  name="password" [(ngModel)]="password">
+        <ion-input label="Contraseña" name="password" [(ngModel)]="password">
           <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         </ion-input>
       </ion-item>
 
-      <ion-button expand="full" type="submit" >Login</ion-button>
+      <ion-button expand="full" type="submit">
+        @if(isLoading){
+        <ion-spinner name="dots"></ion-spinner>
+        }@else{ Iniciar Sesion }
+      </ion-button>
     </form>
     @if(error){
-      <div style="color: red;">
-        <p>{{error}}</p>
-      </div>
+    <div style="color: red">
+      <p>{{error}}</p>
+    </div>
     }
   </div>
-
 </ion-content>
 <app-navegador></app-navegador>

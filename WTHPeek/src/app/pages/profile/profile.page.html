@@ -1,7 +1,11 @@
 <ion-header>
   <ion-toolbar>
+    <ion-button size="default" color="primary" strong="true" slot="start" routerLink="/">
+      <ion-icon name="caret-back-outline"></ion-icon>
+       Volver
+    </ion-button>
     <ion-title>Perfil de Usuario</ion-title>
-    <ion-button size="default" color="danger" strong="true" slot="end">
+    <ion-button size="default" color="danger" strong="true" slot="end" (click)="logout()">
       <ion-icon name="log-out-outline"></ion-icon>
        Cerrar Sesion
     </ion-button>

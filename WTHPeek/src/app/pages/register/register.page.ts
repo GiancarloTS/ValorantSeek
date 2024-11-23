@@ -17,10 +17,11 @@ export class RegisterPage implements OnInit {
     title: '',
     kdpromedio: 0,
     lastactiviy: new Date(),
+    rol: '',
   };
 
   error: string = '';
-
+  isLoading: boolean = false;
   password: string = '';
 
   constructor(
@@ -36,6 +37,7 @@ export class RegisterPage implements OnInit {
   }
   async registerUser() {
     try {
+      this.isLoading = true;
       // 1. Registrar el usuario en Firebase Authentication usando email y password
       const userCredential = await this.AuthService.register(
         this.userData.email,
@@ -44,6 +46,8 @@ export class RegisterPage implements OnInit {
 
       // 2. Obtener el UID del usuario registrado
       const uid = userCredential.user?.uid;
+
+      // le asignamos un titulo segun el rango del usuario
       if (this.userData.rank >= 0 && this.userData.rank <= 11) {
         this.userData.title = 'None';
       } else if (this.userData.rank >= 12 && this.userData.rank <= 23) {
@@ -66,10 +70,17 @@ export class RegisterPage implements OnInit {
         this.userData.title = 'Invalid rank'; // Para rangos fuera del rango permitido
       }
 
+      // segun el rango conseigue un rol
+      if (this.userData.rank >= 72) {
+        this.userData.rol = 'expert';
+      } else {
+        this.userData.rol = 'casual';
+      }
+
       // 3. Almacenar los datos adicionales en Firestore bajo el UID del usuario
       if (uid) {
         // Crear un nuevo objeto que excluya el campo 'password'
-        const { name, email,rank, title, kdpromedio, lastactiviy } =
+        const { name, email, rank, title, kdpromedio, lastactiviy, rol } =
           this.userData;
 
         // Guardar en Firestore sin la contraseña
@@ -80,12 +91,14 @@ export class RegisterPage implements OnInit {
           title,
           kdpromedio,
           lastactiviy,
+          rol,
         });
-
+        this.isLoading = true;
         // 4. Redirigir al usuario a la página de inicio o a otra página
         this.Router.navigate(['/login']); // Redirige a home
       }
     } catch (error) {
+      this.isLoading = false;
       console.error('Error registrando al usuario:', error);
       this.error = this.AuthService.GenerarError(error);
     }

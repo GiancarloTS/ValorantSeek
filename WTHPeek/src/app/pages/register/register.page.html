@@ -19,7 +19,13 @@
       <ion-item>
         <ion-input label="Rango" type="number" placeholder="1" min="1" max="100" size="100" name="rango" [(ngModel)]="userData.rank"></ion-input>
       </ion-item>
-      <ion-button expand="full" type="submit">Registrarse</ion-button>
+      <ion-button expand="full" type="submit">
+        @if(isLoading){
+          <ion-spinner name="dots"></ion-spinner>
+        }@else{
+          Registrarse
+        }
+        </ion-button>
     </form>
   </div>
 </ion-content>

@@ -5,4 +5,5 @@ export interface user {
   title:string,
   kdpromedio:number,
   lastactiviy:Date,
+  rol:string,
 }
