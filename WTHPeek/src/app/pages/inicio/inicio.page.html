@@ -1,38 +1,69 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Noticias de Steam</ion-title>
+    <ion-title>Noticias</ion-title>
   </ion-toolbar>
 </ion-header>
+<app-perfil-emb></app-perfil-emb>
 
 <ion-content>
-  <app-perfil-emb></app-perfil-emb>
-
-  <!-- Spinner mientras cargan las noticias -->
-  <ion-spinner *ngIf="isLoading" name="crescent" class="loading-spinner"></ion-spinner>
-
-  <!-- Lista de noticias -->
-  <ion-list *ngIf="!isLoading && steamNews.length > 0">
-    <ion-item *ngFor="let news of steamNews">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{ news.title }}</ion-card-title>
-          <ion-card-subtitle>{{ news.date * 1000 | date: 'fullDate' }}</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content [innerHTML]="news.formattedContents">
-          <!-- Renderizar contenido formateado -->
-        </ion-card-content>
-        <ion-button fill="outline" color="primary" [href]="news.url" target="_blank">
-          Leer más
-        </ion-button>
-      </ion-card>
-    </ion-item>
-  </ion-list>
-
-  <!-- Mensaje si no hay noticias -->
-  <div *ngIf="!isLoading && steamNews.length === 0" class="no-news">
-    <p>No hay noticias disponibles en este momento.</p>
+  <!-- Spinner de carga -->
+  <div *ngIf="isLoading" class="loading-spinner">
+    <ion-spinner name="crescent"></ion-spinner>
   </div>
 
+  <!-- Lista de Noticias -->
+  <ion-grid *ngIf="!isLoading && displayedNews.length > 0">
+    <ion-row>
+      <ion-col size="6" *ngFor="let news of displayedNews">
+        <ion-card (click)="showNewsDetails(news)">
+          <!-- Título de la noticia -->
+          <ion-card-header>
+            <ion-card-title>{{ news.title }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
+  <!-- Botón para cargar más -->
+  <ion-button
+    expand="full"
+    *ngIf="displayedNews.length < steamNews.length"
+    (click)="loadMoreNews()"
+  >
+    Cargar más
+  </ion-button>
+
+  <!-- Mensaje si no hay noticias -->
+  <ion-text *ngIf="!isLoading && steamNews.length === 0" class="no-news">
+    No se encontraron noticias.
+  </ion-text>
+
+  <!-- Detalles de la Noticia -->
+  <div *ngIf="selectedNews" class="news-details">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ selectedNews.title }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <!-- Contenido formateado -->
+        <div [innerHTML]="formatBBCode(selectedNews.contents)"></div>
+      </ion-card-content>
+      <!-- Botones de acción -->
+      <ion-footer>
+        <ion-button expand="block" color="primary" (click)="closeNewsDetails()">
+          Cerrar
+        </ion-button>
+        <ion-button
+          expand="block"
+          color="secondary"
+          [href]="selectedNews.url"
+          target="_blank"
+        >
+          Leer más
+        </ion-button>
+      </ion-footer>
+    </ion-card>
+  </div>
 </ion-content>
 <app-navegador></app-navegador>

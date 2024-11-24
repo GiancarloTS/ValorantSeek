@@ -8,7 +8,10 @@ import { SteamNewsService } from '../../services/steam-news.service';
 })
 export class InicioPage implements OnInit {
   steamNews: any[] = []; // Noticias obtenidas
+  displayedNews: any[] = []; // Noticias actualmente visibles
   isLoading: boolean = true; // Muestra un spinner mientras carga
+  pageIndex: number = 0; // Índice de página actual
+  pageSize: number = 12; // Tamaño de la página (número de noticias por página)
 
   constructor(private steamNewsService: SteamNewsService) {}
 
@@ -21,6 +24,7 @@ export class InicioPage implements OnInit {
       (data) => {
         if (data && data.appnews && data.appnews.newsitems) {
           this.steamNews = data.appnews.newsitems; // Guardamos las noticias
+          this.displayedNews = this.steamNews.slice(0, this.pageSize); // Muestra la primera página
         }
         this.isLoading = false; // Detenemos el spinner
       },
@@ -30,11 +34,23 @@ export class InicioPage implements OnInit {
       }
     );
   }
+
+  selectedNews: any = null;
+
+  showNewsDetails(news: any) {
+    this.selectedNews = news;
+  }
+
+  closeNewsDetails() {
+    this.selectedNews = null;
+  }
+
   // Conversión de BBCode a HTML
   formatBBCode(content: string): string {
     if (!content) return '';
 
-    const steamImageBaseURL = 'https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/clans';
+    const steamImageBaseURL =
+      'https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/clans';
 
     return content
       .replace(/\[img\]\{STEAM_CLAN_IMAGE\}(.*?)\[\/img\]/g, `<img src="${steamImageBaseURL}$1" alt="Image">`)
@@ -46,5 +62,15 @@ export class InicioPage implements OnInit {
       .replace(/\[list\](.*?)\[\/list\]/gs, '<ul>$1</ul>')
       .replace(/\[\*\](.*?)$/gm, '<li>$1</li>')
       .replace(/\[\/?\w+\]/g, ''); // Eliminar etiquetas no soportadas
+  }
+
+  // Cargar más noticias al presionar el botón
+  loadMoreNews() {
+    this.pageIndex++;
+    const startIndex = this.pageIndex * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    const moreNews = this.steamNews.slice(startIndex, endIndex);
+
+    this.displayedNews = [...this.displayedNews, ...moreNews];
   }
 }

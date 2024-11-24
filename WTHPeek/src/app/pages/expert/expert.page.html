@@ -6,22 +6,36 @@
     </ion-button>
     <ion-title>Zona de Expertos</ion-title>
   </ion-toolbar>
-
 </ion-header>
 
 <ion-content>
-  <div *ngIf="userData">
+  <div class="expert-container">
+    <h2>Contenido Exclusivo para Expertos</h2>
+
+    <p>Explora contenido exclusivo solo disponible para expertos:</p>
+
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Bienvenido, {{ userData.name }}</ion-card-title>
+        <ion-card-title>Winrate por Países</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <p>Rango: {{ userData.rank }}</p>
-        <p>Título: {{ userData.title }}</p>
-        <p>K/D Promedio: {{ userData.kdpromedio }}</p>
+        Consulta estadísticas detalladas del winrate por países.
       </ion-card-content>
+      <ion-button expand="full" color="primary" href="https://wt.controlnet.space/" target="_blank">
+        Ver Winrate
+      </ion-button>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Skins para tus Vehículos</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Personaliza tus vehículos con las mejores skins disponibles.
+      </ion-card-content>
+      <ion-button expand="full" color="secondary" href="https://live.warthunder.com/feed/camouflages/" target="_blank">
+        Ver Skins
+      </ion-button>
     </ion-card>
   </div>
-  <p *ngIf="!userData">Cargando información...</p>
 </ion-content>
-

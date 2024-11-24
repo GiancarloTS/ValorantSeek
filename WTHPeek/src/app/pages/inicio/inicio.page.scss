@@ -1,97 +1,82 @@
-/* Fondo General */
-ion-content {
-  background: linear-gradient(to bottom, #1c1f24, #0f0f12); /* Fondo degradado oscuro */
-  color: #ffffff; /* Texto blanco predeterminado */
-  font-family: 'Roboto', sans-serif; /* Tipografía moderna */
-  padding: 10px; /* Espaciado general */
+ion-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Tarjetas centradas horizontalmente */
+  align-items: flex-start; /* Alineación superior uniforme */
+  gap: 20px; /* Espaciado entre las tarjetas */
+  padding: 20px;
 }
 
-/* Tarjetas de Noticias */
+ion-col {
+  flex: 0 0 calc(33.333% - 40px); /* Tres tarjetas por fila */
+  max-width: calc(33.333% - 40px); /* Asegura que cada tarjeta tenga el mismo tamaño */
+  display: flex;
+  justify-content: center; /* Centra las tarjetas dentro de su contenedor */
+}
+
 ion-card {
-  background: rgba(35, 39, 46, 0.9); /* Fondo translúcido oscuro */
-  border: 1px solid #2d3138; /* Bordes oscuros */
-  border-radius: 12px; /* Bordes redondeados */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6); /* Sombra ligera */
-  margin-bottom: 15px; /* Espaciado entre tarjetas */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%; /* Ocupar todo el ancho del contenedor */
+  max-width: 300px;
+  background: rgba(40, 44, 52, 0.9); /* Fondo oscuro translúcido */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7); /* Sombra para destacar */
+  transition: transform 0.2s ease-in-out; /* Animación suave al pasar el ratón */
+  padding: 10px; /* Espaciado interno */
 }
 
 ion-card:hover {
-  transform: scale(1.02); /* Ligero aumento al pasar el cursor */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.8); /* Sombra más intensa */
+  transform: scale(1.05); /* Efecto de aumento al pasar el ratón */
 }
 
-ion-card-title {
-  font-size: 18px;
-  font-weight: bold;
-  color: #ffffff; /* Texto blanco */
-  text-align: center;
-  margin: 10px 0;
-  letter-spacing: 0.5px;
-}
-
-ion-card-subtitle {
-  color: #b0b0b0; /* Texto gris claro */
-  font-size: 14px;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-/* Contenido de Noticias */
-ion-card-content {
-  font-size: 14px;
-  color: #d0d0d0; /* Texto gris claro */
-  line-height: 1.5;
-  margin: 10px 0;
-}
-
-/* Imagen de Noticias */
-ion-img {
+ion-card img {
+  width: 100%;
+  height: 150px; /* Altura uniforme para las imágenes */
+  object-fit: cover; /* Ajusta la imagen para llenar el espacio sin deformarla */
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  margin-bottom: 10px;
 }
 
-/* Botones */
-ion-button {
-  --background: #2e343e; /* Fondo oscuro metálico */
-  --background-activated: #41474f; /* Fondo al presionar */
-  --color: #ffffff; /* Texto blanco */
-  border-radius: 6px;
+ion-card-header {
+  text-align: center;
+  font-size: 18px; /* Tamaño de fuente más grande para títulos */
   font-weight: bold;
-  letter-spacing: 0.5px;
-  margin-top: 10px;
+  color: #ffffff; /* Color blanco para el texto */
+  padding: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Recorta el texto si es demasiado largo */
+  white-space: normal; /* Permite que el texto se divida en varias líneas */
+  line-height: 1.5; /* Mejora el espaciado entre líneas */
 }
 
-ion-button:hover {
-  --background: #3a4049; /* Fondo más claro al pasar el cursor */
+ion-card-content {
+  font-size: 14px;
+  color: #d0d0d0; /* Color gris claro */
+  padding: 10px;
+  text-align: justify; /* Justificación del texto para un aspecto más limpio */
 }
 
-/* Spinner */
-.loading-spinner {
-  display: block;
-  margin: 20px auto;
-  color: #ffffff;
+.news-details {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  width: 90%;
+  max-width: 500px;
+  background: rgba(40, 44, 52, 1); /* Fondo oscuro sólido */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8); /* Sombra para destacar el detalle */
 }
 
-/* Sin Noticias */
+.news-details ion-card-content {
+  max-height: 300px; /* Altura máxima para el contenido */
+  overflow-y: auto; /* Scroll si el contenido es demasiado largo */
+}
+
 .no-news {
   text-align: center;
-  font-size: 16px;
-  color: #d0d0d0;
+  color: gray;
+  font-size: 1.2em;
   margin-top: 20px;
-}
-
-/* Responsividad */
-@media (max-width: 768px) {
-  ion-card-title {
-    font-size: 16px; /* Ajustar tamaño para pantallas pequeñas */
-  }
-
-  ion-card-content {
-    font-size: 12px; /* Texto más pequeño */
-  }
 }
