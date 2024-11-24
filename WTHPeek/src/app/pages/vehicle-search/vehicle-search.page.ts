@@ -11,11 +11,10 @@ export class VehicleSearchPage implements OnInit {
   displayedVehicles: any[] = []; // Vehículos actualmente visibles
   countries: string[] = [];
   types: string[] = [
-    'tank', 'light_tank', 'medium_tank', 'heavy_tank', 'tank_destroyer',
-    'spaa', 'lbv', 'mbv', 'hbv', 'exoskeleton', 'attack_helicopter',
-    'utility_helicopter', 'fighter', 'assault', 'bomber', 'ship',
-    'destroyer', 'light_cruiser', 'boat', 'heavy_boat', 'barge',
-    'frigate', 'heavy_cruiser', 'battlecruiser', 'battleship', 'submarine',
+    'tank', 'helicopter', 'ship', // Tipos generales
+    'light_tank', 'medium_tank', 'heavy_tank', 'tank_destroyer',
+    'attack_helicopter', 'utility_helicopter',
+    'destroyer', 'light_cruiser', 'battleship', 'submarine',
   ];
   selectedCountry: string = '';
   selectedType: string = '';
@@ -44,16 +43,32 @@ export class VehicleSearchPage implements OnInit {
     });
   }
 
+  // Obtiene los subtipos para el tipo seleccionado
+  getSubtypes(type: string): string[] {
+    const typeMap: { [key: string]: string[] } = {
+      tank: ['light_tank', 'medium_tank', 'heavy_tank', 'tank_destroyer', 'spaa'],
+      helicopter: ['attack_helicopter', 'utility_helicopter'],
+      ship: ['destroyer', 'light_cruiser', 'battleship', 'submarine'],
+    };
+
+    return typeMap[type] || [type]; // Devuelve los subtipos o el tipo mismo si no hay coincidencia
+  }
+
   // Filtra los vehículos según los filtros seleccionados
   filterVehicles() {
+    const selectedSubtypes = this.getSubtypes(this.selectedType);
+
     const filteredVehicles = this.vehicles.filter((vehicle) => {
-      return (
-        (!this.selectedCountry || vehicle.country === this.selectedCountry) &&
-        (!this.selectedType || vehicle.vehicle_type === this.selectedType)
-      );
+      const matchesCountry =
+        !this.selectedCountry || vehicle.country === this.selectedCountry;
+      const matchesType =
+        !this.selectedType || selectedSubtypes.includes(vehicle.vehicle_type);
+
+      return matchesCountry && matchesType;
     });
-    this.pageIndex = 0; // Reinicia el índice de la página
-    this.displayedVehicles = []; // Limpia los vehículos visibles
+
+    this.pageIndex = 0;
+    this.displayedVehicles = [];
     this.appendVehicles(filteredVehicles);
   }
 
@@ -68,18 +83,29 @@ export class VehicleSearchPage implements OnInit {
     this.displayedVehicles = [...this.displayedVehicles, ...newVehicles];
   }
 
-  // Cargar más vehículos al presionar el botón
-  loadMoreVehicles() {
-    this.pageIndex++;
-    this.appendVehicles(
-      this.vehicles.filter((vehicle) => {
-        return (
-          (!this.selectedCountry || vehicle.country === this.selectedCountry) &&
-          (!this.selectedType || vehicle.vehicle_type === this.selectedType)
-        );
-      })
-    );
-  }
+// Cargar más vehículos al presionar el botón
+loadMoreVehicles() {
+  const selectedSubtypes = this.getSubtypes(this.selectedType);
+  const filteredVehicles = this.vehicles.filter((vehicle) => {
+    const matchesCountry =
+      !this.selectedCountry || vehicle.country === this.selectedCountry;
+    const matchesType =
+      !this.selectedType || selectedSubtypes.includes(vehicle.vehicle_type);
+
+    return matchesCountry && matchesType;
+  });
+
+  this.pageIndex++;
+  const startIndex = this.pageIndex * this.pageSize;
+  const endIndex = Math.min(
+    startIndex + this.pageSize,
+    filteredVehicles.length
+  );
+  const newVehicles = filteredVehicles.slice(startIndex, endIndex);
+
+  this.displayedVehicles = [...this.displayedVehicles, ...newVehicles];
+}
+
 
   // Restablece los filtros y muestra todos los vehículos
   resetFilters() {
@@ -95,14 +121,13 @@ export class VehicleSearchPage implements OnInit {
     this.filterVehicles();
   }
 
-// Mostrar detalles
-showVehicleDetails(vehicle: any) {
-  this.selectedVehicle = vehicle;
-}
+  // Mostrar detalles
+  showVehicleDetails(vehicle: any) {
+    this.selectedVehicle = vehicle;
+  }
 
-// Cerrar detalles
-closeVehicleDetails() {
-  this.selectedVehicle = null;
-}
-
+  // Cerrar detalles
+  closeVehicleDetails() {
+    this.selectedVehicle = null;
+  }
 }

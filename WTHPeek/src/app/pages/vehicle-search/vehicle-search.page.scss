@@ -1,20 +1,20 @@
 /* Fondo General */
 ion-content {
-  background: linear-gradient(to bottom, #1c1f24, #101215);
-  color: #ffffff;
+  background: var(--background-gradient, linear-gradient(to bottom, #1c1f24, #101215));
+  color: var(--font-color, #ffffff);
   font-family: 'Roboto', sans-serif;
   padding: 10px;
 }
 
 /* Header Styling */
 ion-header {
-  background-color: #23272e;
-  border-bottom: 2px solid #2d3138;
+  background-color: var(--header-background, #23272e);
+  border-bottom: 2px solid var(--header-border, #2d3138);
 }
 
 ion-toolbar ion-title {
   font-size: 20px;
-  color: #e0e0e0;
+  color: var(--toolbar-color, #e0e0e0);
   text-transform: uppercase;
   letter-spacing: 1px;
   text-align: center;
@@ -22,7 +22,7 @@ ion-toolbar ion-title {
 
 /* Filtros */
 ion-list {
-  background: rgba(40, 44, 52, 0.95);
+  background: var(--list-background, rgba(40, 44, 52, 0.95));
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
@@ -32,22 +32,22 @@ ion-list {
 
 ion-item {
   --background: transparent;
-  --color: #ffffff;
+  --color: var(--item-color, #ffffff);
   margin-bottom: 10px;
 }
 
 ion-select {
-  --color: #ffffff;
-  --placeholder-color: #888888;
-  --background: rgba(46, 50, 57, 0.8);
+  --color: var(--select-color, #ffffff);
+  --placeholder-color: var(--placeholder-color, #888888);
+  --background: var(--select-background, rgba(46, 50, 57, 0.8));
   border-radius: 6px;
 }
 
 /* Botones */
 ion-button {
-  --background: #2e343e;
-  --background-activated: #41474f;
-  --color: #ffffff;
+  --background: var(--button-background, #2e343e);
+  --background-activated: var(--button-background-hover, #41474f);
+  --color: var(--button-color, #ffffff);
   border-radius: 6px;
   font-weight: bold;
   letter-spacing: 0.5px;
@@ -56,7 +56,7 @@ ion-button {
 }
 
 ion-button:hover {
-  --background: #3a4049;
+  --background: var(--button-hover, #3a4049);
 }
 
 /* Tarjetas de Vehículos */
@@ -69,8 +69,8 @@ ion-button:hover {
 }
 
 ion-card {
-  background: rgba(35, 39, 46, 0.9);
-  border: 1px solid #2d3138;
+  background: var(--card-background, rgba(35, 39, 46, 0.9));
+  border: 1px solid var(--card-border, #2d3138);
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
   transition: transform 0.2s ease-in-out;
@@ -91,7 +91,7 @@ ion-card img {
 
 ion-card-header ion-card-title {
   font-size: 18px;
-  color: #ffffff;
+  color: var(--title-color, #ffffff);
   text-align: center;
   margin: 10px 0;
   letter-spacing: 0.5px;
@@ -99,7 +99,7 @@ ion-card-header ion-card-title {
 
 ion-card-content {
   font-size: 14px;
-  color: #b0b0b0;
+  color: var(--content-color, #b0b0b0);
   line-height: 1.5;
   text-align: center;
 }
@@ -113,7 +113,7 @@ ion-card-content {
   z-index: 1000;
   width: 90%;
   max-width: 400px;
-  background: rgba(40, 44, 52, 1);
+  background: var(--modal-background, rgba(40, 44, 52, 1));
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
@@ -121,18 +121,18 @@ ion-card-content {
 
 .vehicle-details ion-card-title {
   font-size: 1.5em;
-  color: #ffffff;
+  color: var(--modal-title-color, #ffffff);
 }
 
 .vehicle-details ion-card-content {
-  color: #b0b0b0;
+  color: var(--modal-content-color, #b0b0b0);
   line-height: 1.6;
   font-size: 0.9em;
 }
 
 .vehicle-details ion-button {
-  --background: #d9534f;
-  --color: #ffffff;
+  --background: var(--modal-button-background, #d9534f);
+  --color: var(--modal-button-color, #ffffff);
   margin-top: 15px;
   border-radius: 8px;
   font-weight: bold;
@@ -153,56 +153,49 @@ ion-card-content {
     font-size: 16px;
   }
 }
-.news-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin: 20px 0;
+
+/* Estilo para el modo oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-gradient: linear-gradient(to bottom, #1c1f24, #101215);
+    --font-color: #ffffff;
+    --header-background: #23272e;
+    --header-border: #2d3138;
+    --toolbar-color: #e0e0e0;
+    --list-background: rgba(40, 44, 52, 0.95);
+    --item-color: #ffffff;
+    --select-background: rgba(46, 50, 57, 0.8);
+    --button-background: #2e343e;
+    --button-hover: #3a4049;
+    --card-background: rgba(35, 39, 46, 0.9);
+    --card-border: #2d3138;
+    --title-color: #ffffff;
+    --content-color: #b0b0b0;
+    --modal-background: rgba(40, 44, 52, 1);
+    --modal-title-color: #ffffff;
+    --modal-content-color: #b0b0b0;
+  }
 }
 
-ion-card {
-  background: rgba(40, 44, 52, 0.9);
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
-  transition: transform 0.2s ease-in-out;
-  max-width: 300px;
-  cursor: pointer;
+/* Estilo para el modo claro */
+@media (prefers-color-scheme: light) {
+  :root {
+    --background-gradient: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+    --font-color: #000000;
+    --header-background: #f8f9fa;
+    --header-border: #dcdcdc;
+    --toolbar-color: #333333;
+    --list-background: rgba(255, 255, 255, 0.95);
+    --item-color: #000000;
+    --select-background: rgba(240, 240, 240, 0.8);
+    --button-background: #e9ecef;
+    --button-hover: #dcdcdc;
+    --card-background: rgba(255, 255, 255, 0.9);
+    --card-border: #dcdcdc;
+    --title-color: #000000;
+    --content-color: #4f4f4f;
+    --modal-background: rgba(255, 255, 255, 1);
+    --modal-title-color: #000000;
+    --modal-content-color: #4f4f4f;
+  }
 }
-
-ion-card:hover {
-  transform: scale(1.05);
-}
-
-ion-card img {
-  width: 100%;
-  height: auto;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-}
-
-.news-details {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-  width: 90%;
-  max-width: 600px;
-  background: rgba(40, 44, 52, 1);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
-}
-
-.news-details ion-card-title {
-  text-align: center;
-  font-size: 1.4rem;
-}
-
-.no-news {
-  text-align: center;
-  margin: 20px;
-  color: #ccc;
-}
-

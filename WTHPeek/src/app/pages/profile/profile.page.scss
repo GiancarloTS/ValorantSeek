@@ -1,26 +1,32 @@
 .profile-container {
   padding: 20px;
-  background-color: #292929;
+  background-color: var(--profile-bg, #292929);
   border-radius: 10px;
   margin: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: var(--text-color, #ffffff);
 }
 
 .profile-container h2 {
   font-size: 1.8em;
   margin-bottom: 10px;
+  color: var(--header-color, #ffffff);
 }
-.botones{
-  margin:13px;
+
+.botones {
+  margin: 13px;
   padding: auto;
 }
+
 .profile-container h3 {
   font-size: 1.5em;
   margin-bottom: 15px;
+  color: var(--header-color, #ffffff);
 }
+
 #Imagen {
   position: absolute;
-  top:-62px;
+  top: -62px;
   left: 0;
   width: 70rem;
   height: 40rem;
@@ -30,17 +36,23 @@
   transform: rotateY(180deg); /* Rota la imagen 180 grados alrededor del eje Y */
   animation: moveTank 5s linear infinite; /* Aplica la animación */
 }
-.up{
+
+.up {
   z-index: 1;
   position: relative;
 }
-#fotouser{
+
+#fotouser {
   font-size: 190px;
+  color: var(--icon-color, #ffffff);
 }
+
 .profile-container p {
   font-size: 1.2em;
   margin: 5px 0;
+  color: var(--text-color, #ffffff);
 }
+
 #centered-content {
   display: flex;                 /* Usar flexbox */
   justify-content: center;       /* Centrar horizontalmente */
@@ -52,3 +64,22 @@
   text-align: center;            /* Centrar texto dentro del div */
 }
 
+
+/* Modo claro y oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --profile-bg: #292929;
+    --text-color: #ffffff;
+    --header-color: #e0e0e0;
+    --icon-color: #ffffff;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --profile-bg: #f8f9fa;
+    --text-color: #000000;
+    --header-color: #333333;
+    --icon-color: #000000;
+  }
+}

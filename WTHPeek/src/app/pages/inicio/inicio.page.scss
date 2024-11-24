@@ -17,9 +17,8 @@ ion-col {
 ion-card {
   width: 100%; /* Ocupar todo el ancho del contenedor */
   max-width: 300px;
-  background: rgba(40, 44, 52, 0.9); /* Fondo oscuro translúcido */
   border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7); /* Sombra para destacar */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
   transition: transform 0.2s ease-in-out; /* Animación suave al pasar el ratón */
   padding: 10px; /* Espaciado interno */
 }
@@ -40,7 +39,6 @@ ion-card-header {
   text-align: center;
   font-size: 18px; /* Tamaño de fuente más grande para títulos */
   font-weight: bold;
-  color: #ffffff; /* Color blanco para el texto */
   padding: 10px;
   overflow: hidden;
   text-overflow: ellipsis; /* Recorta el texto si es demasiado largo */
@@ -50,7 +48,6 @@ ion-card-header {
 
 ion-card-content {
   font-size: 14px;
-  color: #d0d0d0; /* Color gris claro */
   padding: 10px;
   text-align: justify; /* Justificación del texto para un aspecto más limpio */
 }
@@ -63,10 +60,9 @@ ion-card-content {
   z-index: 1000;
   width: 90%;
   max-width: 500px;
-  background: rgba(40, 44, 52, 1); /* Fondo oscuro sólido */
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8); /* Sombra para destacar el detalle */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra para destacar el detalle */
 }
 
 .news-details ion-card-content {
@@ -76,7 +72,52 @@ ion-card-content {
 
 .no-news {
   text-align: center;
-  color: gray;
   font-size: 1.2em;
   margin-top: 20px;
+}
+
+/* Estilo para el modo oscuro */
+@media (prefers-color-scheme: dark) {
+  ion-card {
+    background: rgba(40, 44, 52, 0.9); /* Fondo oscuro translúcido */
+  }
+
+  ion-card-header {
+    color: #ffffff; /* Color blanco para el texto */
+  }
+
+  ion-card-content {
+    color: #d0d0d0; /* Color gris claro */
+  }
+
+  .news-details {
+    background: rgba(40, 44, 52, 1); /* Fondo oscuro sólido */
+  }
+
+  .no-news {
+    color: gray;
+  }
+}
+
+/* Estilo para el modo claro */
+@media (prefers-color-scheme: light) {
+  ion-card {
+    background: rgba(255, 255, 255, 0.9); /* Fondo claro translúcido */
+  }
+
+  ion-card-header {
+    color: #000000; /* Color negro para el texto */
+  }
+
+  ion-card-content {
+    color: #333333; /* Color gris oscuro */
+  }
+
+  .news-details {
+    background: rgba(255, 255, 255, 1); /* Fondo claro sólido */
+  }
+
+  .no-news {
+    color: #666666;
+  }
 }
