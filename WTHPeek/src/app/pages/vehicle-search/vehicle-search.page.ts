@@ -20,8 +20,10 @@ export class VehicleSearchPage implements OnInit {
   selectedCountry: string = '';
   selectedType: string = '';
   pageIndex: number = 0; // Índice actual de la página
-  pageSize: number = 14; // Cantidad de imágenes por página
+  pageSize: number = 14; // Cantidad de tarjetas visibles por carga
+  maxDisplayedVehicles: number = 14; // Límite máximo de tarjetas visibles
   isLoading: boolean = false; // Indicador de carga
+  selectedVehicle: any | null = null; // Vehículo seleccionado para detalles
 
   private apiUrl: string = 'https://www.wtvehiclesapi.sgambe.serv00.net/api/vehicles';
 
@@ -58,7 +60,10 @@ export class VehicleSearchPage implements OnInit {
   // Agrega más vehículos filtrados a la lista visible
   appendVehicles(filteredVehicles: any[]) {
     const startIndex = this.pageIndex * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
+    const endIndex = Math.min(
+      startIndex + this.pageSize,
+      this.maxDisplayedVehicles
+    );
     const newVehicles = filteredVehicles.slice(startIndex, endIndex);
     this.displayedVehicles = [...this.displayedVehicles, ...newVehicles];
   }
@@ -89,4 +94,15 @@ export class VehicleSearchPage implements OnInit {
   onFiltersChange() {
     this.filterVehicles();
   }
+
+// Mostrar detalles
+showVehicleDetails(vehicle: any) {
+  this.selectedVehicle = vehicle;
+}
+
+// Cerrar detalles
+closeVehicleDetails() {
+  this.selectedVehicle = null;
+}
+
 }

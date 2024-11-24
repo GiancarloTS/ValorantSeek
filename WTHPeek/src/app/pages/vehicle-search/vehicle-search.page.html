@@ -43,7 +43,7 @@
   <ion-grid *ngIf="!isLoading && displayedVehicles.length > 0">
     <ion-row>
       <ion-col size="6" *ngFor="let vehicle of displayedVehicles">
-        <ion-card>
+        <ion-card (click)="showVehicleDetails(vehicle)">
           <!-- Imagen del vehículo -->
           <img [src]="vehicle.images.image" alt="{{ vehicle.identifier }}" />
 
@@ -53,19 +53,35 @@
 
           <!-- Información adicional -->
           <ion-card-content>
+            <p><strong>País:</strong> {{ vehicle.country}}</p>
             <p><strong>BR Realista:</strong> {{ vehicle.realistic_br }}</p>
-            <p><strong>Era:</strong> {{ vehicle.era }}</p>
-            <p><strong>Valor:</strong> {{ vehicle.value }}</p>
-            <p>
-              <strong>Fecha de Lanzamiento:</strong>
-              {{ vehicle.release_date ? vehicle.release_date : 'No disponible' }}
-            </p>
-            <p><strong>Cantidad de Tripulación:</strong> {{ vehicle.crew_total_count }}</p>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <!-- Detalles del Vehículo -->
+  <div *ngIf="selectedVehicle" class="vehicle-details">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ selectedVehicle.identifier }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>País:</strong> {{ selectedVehicle.country }}</p>
+        <p><strong>Tipo:</strong> {{ selectedVehicle.vehicle_type }}</p>
+        <p><strong>BR Realista:</strong> {{ selectedVehicle.realistic_br }}</p>
+        <p><strong>XP:</strong> {{ selectedVehicle.xp || 'N/A' }}</p>
+        <p><strong>Tripulación:</strong> {{ selectedVehicle.crew_total_count }}</p>
+        <p><strong>Valor:</strong> {{ selectedVehicle.value}}$</p>
+        <p>
+          <strong>Fecha de Lanzamiento:</strong>
+          {{ selectedVehicle.release_date || 'No disponible' }}
+        </p>
+      </ion-card-content>
+      <ion-button expand="block" (click)="closeVehicleDetails()">Cerrar</ion-button>
+    </ion-card>
+  </div>
 
   <!-- Mensaje Sin Resultados -->
   <ion-text *ngIf="!isLoading && displayedVehicles.length === 0">

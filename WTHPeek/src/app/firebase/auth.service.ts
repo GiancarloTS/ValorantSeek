@@ -21,7 +21,10 @@ export class AuthService {
   private userSubject = new BehaviorSubject<user | null>(null); // NUEVO: Observable específico para usuario
   public user$ = this.userSubject.asObservable(); // NUEVO: Exponer observable públicamente
 
-  constructor(private afAuth: Auth, private firestoreService: FirestoreService) {
+  constructor(
+    private afAuth: Auth,
+    private firestoreService: FirestoreService
+  ) {
     // Detectar cambios en el estado de autenticación
     onAuthStateChanged(this.afAuth, async (currentUser) => {
       if (currentUser) {
@@ -81,9 +84,19 @@ export class AuthService {
       case 'auth/wrong-password':
         error = 'Contraseña incorrecta';
         break;
+      case 'auth/missing-password':
+        error = 'Debes ingresar una contraseña';
+        break;
+      case 'auth/weak-password':
+        error = 'La contraseña debe ser de 6 caracteres como minimo';
+        break;
+      case 'auth/invalid-credential':
+        error = 'Credenciales no validas';
+        break;
       default:
         error = 'Error: ' + tipo.message;
     }
+    console.log(error);
     return error;
   }
 }

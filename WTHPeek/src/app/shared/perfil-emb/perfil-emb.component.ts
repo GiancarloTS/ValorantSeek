@@ -11,17 +11,25 @@ export class PerfilEmbComponent implements OnInit {
   user: any = null; // Aquí guardamos los datos completos del usuario
   formattedLastActivity: string | null = null; // Variable para la fecha formateada
   constructor(private AuthService: AuthService, private Router: Router) {}
-
-  ngOnInit(): void {
+  isLoading: boolean = true;
+  async ngOnInit() {
     // Suscribirse a los datos completos del usuario
     this.AuthService.authState$.subscribe((userData) => {
       this.user = userData;
       console.log('Datos completos del usuario:', this.user);
-
       // Formatear la fecha de última actividad
       this.formatLastActivity();
+
+
+
+
+
     });
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
   }
+
   formatLastActivity(): void {
     if (this.user && this.user.lastactiviy) {
       console.log('Timestamp de última actividad:', this.user.lastactiviy);
@@ -41,11 +49,16 @@ export class PerfilEmbComponent implements OnInit {
               month: 'long',
               day: 'numeric',
             }
-          );
+          )
+
         } else {
           this.formattedLastActivity = 'No disponible'; // O alguna fecha por defecto
+
         }
+
+
       }
+      this.isLoading = false;
     }
   }
   haciaPerfil() {

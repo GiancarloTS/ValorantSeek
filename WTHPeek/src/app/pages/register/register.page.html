@@ -1,7 +1,12 @@
 
 <ion-content>
   <div class="container">
+
     <form (submit)="registerUser()">
+      <ion-button size="default" color="primary" strong="true" slot="start" class="botones" routerLink="/">
+        <ion-icon name="caret-back-outline"></ion-icon>
+         Volver
+      </ion-button>
       <h2 class="form-title">Registro</h2> <!-- Título agregado aquí -->
 
       <ion-item>
@@ -10,7 +15,7 @@
 
 
     <ion-item>
-      <ion-input label="Email input" name="email" type="email" placeholder="correo@dominio.cl" [(ngModel)]="userData.email"></ion-input>
+      <ion-input label="Correo Electronico" name="email" type="email" placeholder="correo@dominio.cl" [(ngModel)]="userData.email"></ion-input>
     </ion-item>
 
       <ion-item>
@@ -26,6 +31,11 @@
           Registrarse
         }
         </ion-button>
+        @if(error){
+          <div style="color: red;">
+            <p>{{error}}</p>
+          </div>
+        }
     </form>
   </div>
 </ion-content>

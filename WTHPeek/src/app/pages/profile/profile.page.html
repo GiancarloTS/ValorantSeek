@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button size="default" color="primary" strong="true" slot="start" routerLink="/">
+    <ion-button size="default" color="primary" strong="true" slot="start" class="botones" routerLink="/">
       <ion-icon name="caret-back-outline"></ion-icon>
        Volver
     </ion-button>
     <ion-title>Perfil de Usuario</ion-title>
-    <ion-button size="default" color="danger" strong="true" slot="end" (click)="logout()">
+    <ion-button class="botones" size="default" color="danger" strong="true" slot="end" (click)="logout()">
       <ion-icon name="log-out-outline"></ion-icon>
        Cerrar Sesion
     </ion-button>
@@ -16,13 +16,14 @@
 
 <ion-content id="centered-content">
   <div>
+    <img src="assets/media/tanqueshadow.png" id="Imagen">
     <div class="profile-container">
-
-      <h2>Usuario: {{user?.name}}</h2>
-      <h3>Título: {{user?.title}}</h3>
-      <p><strong>Rango:</strong> {{user?.rank}}</p>
-      <p><strong>Última Actividad:</strong> {{formattedLastActivity}}</p>
-      <p><strong>KD Promedio:</strong> {{user?.kdpromedio}}</p>
+      <ion-icon id="fotouser" name="person-circle-outline" class="up"></ion-icon>
+      <h2 class="up">Usuario: {{user?.name}}</h2>
+      <h3 class="up">Título: {{user?.title}}</h3>
+      <p class="up"><strong>Rango:</strong> {{user?.rank}}</p>
+      <p class="up"><strong>Última Actividad:</strong> {{formattedLastActivity}}</p>
+      <p class="up"><strong>KD Promedio:</strong> {{user?.kdpromedio}}</p>
 
     </div>
   </div>

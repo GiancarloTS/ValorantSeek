@@ -9,12 +9,13 @@ import { user } from 'src/app/models/user.model';
 })
 export class NavegadorComponent implements OnInit {
   isExpert: boolean = false;
-
+  user:any = null;
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
     // Subscribirse al observable del usuario
     this.authService.user$.subscribe((userData: user | null) => {
+      this.user = userData
       if (userData && userData.rol) {
         console.log('Rol del usuario:', userData.rol);
         this.isExpert = userData.rol === 'expert';

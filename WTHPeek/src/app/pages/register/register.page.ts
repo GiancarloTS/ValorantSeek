@@ -38,6 +38,11 @@ export class RegisterPage implements OnInit {
   async registerUser() {
     try {
       this.isLoading = true;
+      if(this.userData.name===''){
+        this.isLoading = false;
+        this.error = 'El nombre no puede estar vacio';
+        return;
+      }
       // 1. Registrar el usuario en Firebase Authentication usando email y password
       const userCredential = await this.AuthService.register(
         this.userData.email,
@@ -77,6 +82,8 @@ export class RegisterPage implements OnInit {
         this.userData.rol = 'casual';
       }
 
+
+
       // 3. Almacenar los datos adicionales en Firestore bajo el UID del usuario
       if (uid) {
         // Crear un nuevo objeto que excluya el campo 'password'
@@ -95,7 +102,7 @@ export class RegisterPage implements OnInit {
         });
         this.isLoading = true;
         // 4. Redirigir al usuario a la página de inicio o a otra página
-        this.Router.navigate(['/login']); // Redirige a home
+        this.Router.navigate(['/']); // Redirige a home
       }
     } catch (error) {
       this.isLoading = false;

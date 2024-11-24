@@ -10,12 +10,33 @@
   font-size: 1.8em;
   margin-bottom: 10px;
 }
-
+.botones{
+  margin:13px;
+  padding: auto;
+}
 .profile-container h3 {
   font-size: 1.5em;
   margin-bottom: 15px;
 }
-
+#Imagen {
+  position: absolute;
+  top:-62px;
+  left: 0;
+  width: 70rem;
+  height: 40rem;
+  object-fit: cover; /* Asegúrate de que la imagen cubra todo el espacio */
+  z-index: 0; /* Coloca la imagen detrás de los demás elementos */
+  opacity: 60%;
+  transform: rotateY(180deg); /* Rota la imagen 180 grados alrededor del eje Y */
+  animation: moveTank 5s linear infinite; /* Aplica la animación */
+}
+.up{
+  z-index: 1;
+  position: relative;
+}
+#fotouser{
+  font-size: 190px;
+}
 .profile-container p {
   font-size: 1.2em;
   margin: 5px 0;
@@ -30,3 +51,4 @@
 #centered-content > div {
   text-align: center;            /* Centrar texto dentro del div */
 }
+

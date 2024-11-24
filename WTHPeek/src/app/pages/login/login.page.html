@@ -1,7 +1,16 @@
 <ion-content>
+
   <div class="login-box">
+    <ion-button size="default" color="primary" strong="true" slot="start" class="botones" routerLink="/">
+      <ion-icon name="caret-back-outline"></ion-icon>
+       Volver
+    </ion-button>
     <form (submit)="loginUser()">
+      <ion-text>Iniciar Sesion</ion-text>
+      <ion-card>
+
       <ion-item>
+
         <ion-input
           label="Correo Electronico"
           name="email"
@@ -10,16 +19,17 @@
       </ion-item>
 
       <ion-item>
-        <ion-input label="Contraseña" name="password" [(ngModel)]="password">
+        <ion-input label="Contraseña" name="password"  type="password" [(ngModel)]="password">
           <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         </ion-input>
       </ion-item>
 
-      <ion-button expand="full" type="submit">
+      <ion-button expand="full" type="submit" id="Iniciarsesion">
         @if(isLoading){
         <ion-spinner name="dots"></ion-spinner>
         }@else{ Iniciar Sesion }
       </ion-button>
+    </ion-card>
     </form>
     @if(error){
     <div style="color: red">
@@ -28,4 +38,3 @@
     }
   </div>
 </ion-content>
-<app-navegador></app-navegador>

@@ -1,0 +1,53 @@
+/* Estilo para el ion-card con id carta-cargando */
+#carta-cargando {
+  padding: 20px; /* Ajusta el padding según tus necesidades */
+  border-radius: 10px; /* Redondear esquinas */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Sombra */
+  background-color: #f8f9fa; /* Color de fondo claro */
+  text-align: center; /* Centrar el texto */
+  animation: pulsar 1.5s infinite; /* Duración de 1 segundo y repetición infinita */
+}
+
+/* Estilo para el contenido dentro del ion-card */
+#carta-cargando ion-card-content {
+  padding: 15px; /* Ajusta el padding del contenido interno */
+}
+#carta-cargando label{
+  font-size: 30px ;
+  margin-left: 10px;
+  color: #6c757d;
+}
+/* Estilo para el título */
+#carta-cargando ion-card-title {
+  color: #007bff; /* Color del título */
+}
+#emblema{
+  position: absolute; /* Posiciona la imagen de forma absoluta */
+  top: 50%; /* Coloca la imagen en el centro vertical */
+  left: 6.7rem; /* Coloca la imagen en el centro horizontal */
+  transform: translate(-50%, -50%); /* Ajusta la imagen para que esté centrada */
+  max-width: 100%; /* Asegura que la imagen no desborde el contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+}
+.content{
+  padding: 5px;
+}
+/* Estilo para el subtítulo */
+#carta-cargando ion-card-subtitle {
+  color: #6c757d; /* Color del subtítulo */
+}
+
+
+
+/* Definición de la animación de pulsación */
+@keyframes pulsar {
+  0%, 100% {
+    transform: scale(1); /* Escala normal */
+  }
+  50% {
+    transform: scale(1.01); /* Escala al 105% */
+  }
+  100% {
+    transform: scale(1); /* Escala al 105% */
+  }
+}

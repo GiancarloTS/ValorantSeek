@@ -1,14 +1,60 @@
-
-<ion-card button="true"  [routerLink]="['/profile']">
+@if(isLoading){
+<ion-card id="carta-cargando">
+  <ion-spinner name="circular"></ion-spinner>
+  <label>Buscando Perfil</label>
+</ion-card>
+}@else{ @if(this.user){
+<ion-card button="true" [routerLink]="['/profile']">
   <ion-card-header>
-    <ion-card-title>Hola,{{user?.name}}</ion-card-title>
-    <ion-card-subtitle>Titulo {{user?.title}}</ion-card-subtitle>
+    <ion-card-title>Hola,{{ user?.name }}</ion-card-title>
+    <div class="content">
+    <ion-card-subtitle
+      >Titulo {{ user?.title }}
+      @if(user.title ==="None"){
+      <img src="assets\media\Icon_Rank-1.png" id="emblema" />
+      }@else if(user.title ==="Lieutenant") {
+      <img src="assets\media\Icon_Rank-2.png " id="emblema"/>
+      } @else if(user.title ==="Captain") {
+      <img src="assets\media\Icon_Rank-3.png" id="emblema"/>
+      }@else if(user.title ==="Major"){
+      <img src="assets\media\Icon_Rank-4.png" id="emblema"/>
+      }@else if(user.title ==="Colonel"){
+      <img src="assets\media\Icon_Rank-5.png" id="emblema"/>
+
+      }@else if(user.title ==="Commander"){
+      <img src="assets\media\Icon_Rank-6.png"id="emblema" />
+
+      }@else if(user.title ==="Commodore"){
+      <img src="assets\media\Icon_Rank-7.png"id="emblema" />
+
+      }@else if(user.title ==="General"){
+      <img src="assets\media\Icon_Rank-8.png"id="emblema" />
+
+      }@else if(user.title ==="Marshal"){
+      <img src="assets\media\Icon_Rank-9.png" id="emblema"/>
+      }
+    </ion-card-subtitle>
+  </div>
   </ion-card-header>
 
   <ion-card-content>
-    <p><strong>Rango:</strong> {{user?.rank}}</p>
-    <p><strong>Última Actividad:</strong> {{formattedLastActivity}}</p>
-    <p><strong>KD Promedio:</strong> {{user?.kdpromedio}}</p>
+    <p><strong>Rango:</strong> {{ user?.rank }}</p>
+    <p><strong>Última Actividad:</strong> {{ formattedLastActivity }}</p>
+    <p><strong>KD Promedio:</strong> {{ user?.kdpromedio }}</p>
   </ion-card-content>
 </ion-card>
+}@else{
 
+<ion-card button="true">
+  <ion-card-header>
+    <ion-card-title
+      >Hola,Invitado <ion-icon name="person-outline"></ion-icon
+    ></ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-button [routerLink]="['/login']">Iniciar Sesion</ion-button>
+    <ion-button [routerLink]="['/register']">Registrarse</ion-button>
+  </ion-card-content>
+</ion-card>
+} }
