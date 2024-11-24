@@ -8,7 +8,7 @@ import {
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { AuthService } from '../firebase/auth.service';
-import { user } from '../models/user.model'; // Importar el modelo de usuario
+import { user } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',

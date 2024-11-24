@@ -1,46 +1,52 @@
 import { Injectable } from '@angular/core';
 import {
   Auth,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
   signOut,
-} from '@angular/fire/auth'; // Mantengo esta importación
+} from '@angular/fire/auth';
 import { FirestoreService } from './firestore.service';
 import { BehaviorSubject } from 'rxjs';
+import { user } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private authStateSubject = new BehaviorSubject<any>(null); // Observable para todos los datos del usuario
-  authState$ = this.authStateSubject.asObservable(); // Observable original
+  private authStateSubject = new BehaviorSubject<user | null>(null); // Ya existente
+  authState$ = this.authStateSubject.asObservable(); // Ya existente
 
-  private userSubject = new BehaviorSubject<any>(null); // NUEVO: Observable específico para el usuario
-  user$ = this.userSubject.asObservable(); // Observable para el manejo de roles y datos completos
+  // **Nuevo observable para los datos del usuario**
+  private userSubject = new BehaviorSubject<user | null>(null); // NUEVO: Observable específico para usuario
+  public user$ = this.userSubject.asObservable(); // NUEVO: Exponer observable públicamente
 
   constructor(private afAuth: Auth, private firestoreService: FirestoreService) {
-    // Escuchar cambios en el estado de autenticación
-    onAuthStateChanged(this.afAuth, async (user) => {
-      if (user) {
-        // Si el usuario está autenticado, obtener datos adicionales desde Firestore
-        const userData = await this.firestoreService.getUser(user.uid);
-        const fullUserData = {
-          uid: user.uid,
-          email: user.email,
-          ...userData, // Combinar autenticación con datos de Firestore
-        };
-        this.authStateSubject.next(fullUserData); // Emitir datos completos para el observable original
-        this.userSubject.next(fullUserData); // Emitir datos completos para el nuevo observable
+    // Detectar cambios en el estado de autenticación
+    onAuthStateChanged(this.afAuth, async (currentUser) => {
+      if (currentUser) {
+        const userData = await this.firestoreService.getUser(currentUser.uid);
+        if (userData) {
+          const fullUserData: user = {
+            name: userData.name,
+            email: currentUser.email || '',
+            rank: userData.rank,
+            title: userData.title,
+            kdpromedio: userData.kdpromedio,
+            lastactiviy: userData.lastactiviy,
+            rol: userData.rol,
+          };
+          this.authStateSubject.next(fullUserData); // Mantener funcionalidad existente
+          this.userSubject.next(fullUserData); // NUEVO: Emitir datos al nuevo observable
+        }
       } else {
-        // Si no hay usuario autenticado, emitir null
-        this.authStateSubject.next(null);
-        this.userSubject.next(null); // Emitir null en el observable del usuario
+        this.authStateSubject.next(null); // Mantener funcionalidad existente
+        this.userSubject.next(null); // NUEVO: Emitir null al nuevo observable
       }
     });
   }
 
-  // Métodos existentes (sin cambios)
+  // Métodos existentes (sin cambios):
   register(email: string, password: string) {
     return createUserWithEmailAndPassword(this.afAuth, email, password);
   }
@@ -51,21 +57,16 @@ export class AuthService {
 
   logout() {
     return signOut(this.afAuth).then(() => {
-      this.authStateSubject.next(null); // Emitir null al cerrar sesión
-      this.userSubject.next(null); // Emitir null también en el observable del usuario
+      this.authStateSubject.next(null); // Mantener funcionalidad existente
+      this.userSubject.next(null); // NUEVO: Limpiar usuario al cerrar sesión
     });
   }
 
   getCurrentUser() {
-    return this.authStateSubject.value; // Obtener el usuario actual desde el observable original
+    return this.authStateSubject.value; // Mantener funcionalidad existente
   }
 
-  // NUEVO: Obtener datos completos del usuario
-  getCurrentUserData() {
-    return this.userSubject.value;
-  }
-
-  GenerarError(tipo: any) {
+  GenerarError(tipo: any): string {
     let error: string = '';
     switch (tipo.code) {
       case 'auth/email-already-in-use':
@@ -79,12 +80,6 @@ export class AuthService {
         break;
       case 'auth/wrong-password':
         error = 'Contraseña incorrecta';
-        break;
-      case 'auth/network-request-failed':
-        error = 'Error de red. Verifique su conexión a internet';
-        break;
-      case 'auth/invalid-credential':
-        error = 'Credenciales inválidas';
         break;
       default:
         error = 'Error: ' + tipo.message;

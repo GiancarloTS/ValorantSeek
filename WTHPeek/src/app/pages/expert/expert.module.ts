@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ExpertPageRoutingModule } from './expert-routing.module';
 
 import { ExpertPage } from './expert.page';
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ExpertPageRoutingModule
-  ],
+    ExpertPageRoutingModule,
+    SharedModule
+],
   declarations: [ExpertPage]
 })
 export class ExpertPageModule {}

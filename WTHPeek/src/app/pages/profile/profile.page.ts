@@ -48,7 +48,7 @@ export class ProfilePage implements OnInit {
             }
           );
         } else {
-          this.formattedLastActivity = 'No disponible'; // O alguna fecha por defecto
+          this.formattedLastActivity = 'No disponible';
         }
       }
     }
