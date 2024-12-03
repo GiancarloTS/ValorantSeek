@@ -1,3 +1,13 @@
+
+/* Fondo General */
+ion-content {
+  background: var(--background-gradient, linear-gradient(to bottom, #1a1a1a, #101215));
+  color: var(--font-color, #e0e0e0);
+  font-family: 'Roboto', sans-serif;
+  padding: 10px;
+}
+
+/* Tarjetas de Noticias */
 ion-grid {
   display: flex;
   flex-wrap: wrap;
@@ -19,12 +29,13 @@ ion-card {
   max-width: 300px;
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
-  transition: transform 0.2s ease-in-out; /* Animación suave al pasar el ratón */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Animación suave al pasar el ratón */
   padding: 10px; /* Espaciado interno */
 }
 
 ion-card:hover {
   transform: scale(1.05); /* Efecto de aumento al pasar el ratón */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Mayor profundidad */
 }
 
 ion-card img {
@@ -39,6 +50,7 @@ ion-card-header {
   text-align: center;
   font-size: 18px; /* Tamaño de fuente más grande para títulos */
   font-weight: bold;
+  color: var(--title-color, #d4af37); /* Dorado tenue */
   padding: 10px;
   overflow: hidden;
   text-overflow: ellipsis; /* Recorta el texto si es demasiado largo */
@@ -50,8 +62,10 @@ ion-card-content {
   font-size: 14px;
   padding: 10px;
   text-align: justify; /* Justificación del texto para un aspecto más limpio */
+  color: var(--content-color, #b0b0b0); /* Gris claro */
 }
 
+/* Detalles de Noticias */
 .news-details {
   position: fixed;
   top: 50%;
@@ -62,21 +76,46 @@ ion-card-content {
   max-width: 500px;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra para destacar el detalle */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Sombra para destacar el detalle */
+  background: var(--modal-background, rgba(40, 44, 52, 1)); /* Fondo oscuro sólido */
 }
 
 .news-details ion-card-content {
   max-height: 300px; /* Altura máxima para el contenido */
   overflow-y: auto; /* Scroll si el contenido es demasiado largo */
+  color: var(--modal-content-color, #d0d0d0);
 }
 
 .no-news {
   text-align: center;
   font-size: 1.2em;
   margin-top: 20px;
+  color: var(--no-news-color, gray); /* Mensaje neutral */
 }
 
-/* Estilo para el modo oscuro */
+/* Transiciones Suaves */
+ion-card, ion-button, ion-select {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Indicador de Carga */
+.loading-spinner ion-spinner {
+  --color: #d4af37; /* Dorado tenue */
+  margin: 20px auto;
+  display: block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Temas Oscuro y Claro */
 @media (prefers-color-scheme: dark) {
   ion-card {
     background: rgba(40, 44, 52, 0.9); /* Fondo oscuro translúcido */
@@ -99,7 +138,6 @@ ion-card-content {
   }
 }
 
-/* Estilo para el modo claro */
 @media (prefers-color-scheme: light) {
   ion-card {
     background: rgba(255, 255, 255, 0.9); /* Fondo claro translúcido */

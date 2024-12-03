@@ -1,8 +1,9 @@
+
 /* Fondo General */
 ion-content {
   background: var(--background-gradient, linear-gradient(to bottom, #1c1f24, #101215));
   color: var(--font-color, #ffffff);
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Arial', sans-serif;
   padding: 10px;
 }
 
@@ -199,3 +200,152 @@ ion-card-content {
     --modal-content-color: #4f4f4f;
   }
 }
+
+
+/* Mejoras Visuales Adicionales */
+
+/* Transiciones Suaves */
+ion-card, ion-button, ion-select {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Sombreado y Resaltado */
+ion-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+ion-card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+}
+
+/* Animaciones en Hover */
+ion-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Detalles de Vehículos */
+.vehicle-details {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Optimización de Texto */
+ion-card-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+ion-card-content {
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* Interactividad en Tarjetas */
+ion-card img {
+  filter: brightness(0.9);
+  transition: filter 0.3s ease-in-out;
+}
+
+ion-card:hover img {
+  filter: brightness(1.2);
+}
+
+/* Indicador de Carga */
+ion-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsividad Mejorada */
+@media (max-width: 768px) {
+  ion-card-title {
+    font-size: 18px;
+  }
+
+  ion-card-content {
+    font-size: 14px;
+  }
+
+  .vehicle-details {
+    max-width: 90%;
+  }
+}
+
+
+/* Tipografía */
+ion-content {
+  font-family: 'Roboto', sans-serif; /* Elegante y legible */
+}
+
+ion-toolbar ion-title,
+ion-card-title {
+  font-family: 'Roboto', sans-serif; /* Más destacada para títulos */
+  letter-spacing: 1px;
+}
+
+/* Paleta de Colores Temática */
+:root {
+  --background-gradient: linear-gradient(to bottom, #1a1a1a, #101215); /* Oscuro metálico */
+  --font-color: #e0e0e0;
+  --header-background: #23272e;
+  --header-border: #2d3138;
+  --toolbar-color: #ffffff;
+  --list-background: rgba(40, 44, 52, 0.95);
+  --item-color: #d4af37; /* Dorado tenue */
+  --select-background: rgba(46, 50, 57, 0.8);
+  --button-background: #d32f2f; /* Rojo temático */
+  --button-hover: #b71c1c;
+  --card-background: rgba(35, 39, 46, 0.9);
+  --card-border: #2d3138;
+  --title-color: #ffffff;
+  --content-color: #b0b0b0;
+  --modal-background: rgba(40, 44, 52, 1);
+  --modal-title-color: #ffffff;
+  --modal-content-color: #b0b0b0;
+}
+
+/* Temas Oscuro y Claro */
+@media (prefers-color-scheme: light) {
+  :root {
+    --background-gradient: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+    --font-color: #000000;
+    --header-background: #f8f9fa;
+    --header-border: #dcdcdc;
+    --toolbar-color: #333333;
+    --list-background: rgba(255, 255, 255, 0.95);
+    --item-color: #d4af37; /* Mantener dorado tenue */
+    --select-background: rgba(240, 240, 240, 0.8);
+    --button-background: #e57373; /* Rojo claro */
+    --button-hover: #d32f2f;
+    --card-background: rgba(255, 255, 255, 0.9);
+    --card-border: #dcdcdc;
+    --title-color: #000000;
+    --content-color: #4f4f4f;
+    --modal-background: rgba(255, 255, 255, 1);
+    --modal-title-color: #000000;
+    --modal-content-color: #4f4f4f;
+  }
+}
+
